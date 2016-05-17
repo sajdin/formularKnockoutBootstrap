@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--bootstrap lib-->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+
+    <link href="https://rawgithub.com/Aymkdn/Datepicker-for-Bootstrap/master/datepicker.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="https://rawgithub.com/Aymkdn/Datepicker-for-Bootstrap/master/bootstrap-datepicker.js"></script>
+   
+
+ 
+    <title>Formular</title>
+    <!--jumbotron Formular-->
+    <div class="container">
+        <div class="jumbotron text-center">
+            <h2>Formular</h2>  
+        </div>
+    </div>
+
+    <!--Form -->
+    <div class="container">
+        <form class="form-horizontal" role="form" data-bind="submit: addMitarbeiter">
+
+            <!-- Name des Mitarbeiters -->
+            <div class="form-group">
+                <label class="control-label  col-sm-2" for="mitarbeiter">Mitarbeiter:</label>
+                <div class="col-sm-10">
+                    <input data-bind="value: name" class="form-control" id="mitarbeiter" required="" placeholder="Vor- und Nachname">
+                </div>
+            </div>
+            <!-- Datum -->
+            <div class="form-group ">
+                <label class="control-label col-sm-2" for="datum">Datum:</label>
+                <div class="col-sm-10">
+                    <input data-bind="datepicker:datumIn" class="form-control" id="datum" required="">
+                </div>
+            </div>
+            <!-- Begin -->
+            <div class="form-group">
+                <label class="control-label col-sm-2" >Begin:</label>
+                <div class="col-sm-10">
+                    <input id="timePicker1" class="form-control" type="time" placeholder="HH:MM" required="" data-bind="value: time1">
+                </div>
+            </div>
+            <!-- Ende  -->
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="time2">Ende:</label>
+                <div class="col-sm-10">                   
+                    <input id="timePicker2" class="form-control" type="time" placeholder="HH:MM" required="" data-bind="value: time2">
+                </div>
+            </div>
+            <!-- Tätigkeit -->
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="tt">Tätigkeit:</label>
+                <div class="col-sm-10">
+                    <select id="tt" class="form-control" data-bind="selectPicker: t, valueUpdate: 'input', optionsText: 'taetigkeitArt' ,selectPickerOptions: { optionsArray: alleTaetigkeiten }"></select>
+                </div>
+            </div>
+            <!-- Button to Add -->
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-success">Hinzufügen</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!--jumbotron Zeitbericht-->
+    <div class="container text-muted">
+        <div class="jumbotron text-center text-muted">
+            <h2>Zeitbericht</h2><br />       
+        </div>
+    </div>
+    
+    <!--Zeitbericht -->
+    <div class="container" data-bind="visible:alleMitarbeiter().length>0">
+        <div class="table-responsive">
+            <table class="table table-striped" >
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Datum</th>
+                        <th>Begin </th>
+                        <th>Ende </th>
+                        <th>Tätigkeit</th>
+                    </tr>
+                </thead>
+                <tbody data-bind="foreach: alleMitarbeiter">
+                    <tr>
+                        <td><input class="form-control" data-bind="value: n1, valueUpdate: 'input'" /></td>
+                        <td><input class="form-control" data-bind="datepicker: d1, valueUpdate: 'input'" /></td>
+                        <td><input class="form-control" id="timePicker1" type="time"   data-bind="value: t1"/></td>
+                        <td><input class="form-control" id="timePicker2" type="time" data-bind="value: t2"/></td>
+                        <td><select class="form-control" data-bind="options: $root.alleTaetigkeiten, value: taetigkeit,  optionsText: 'taetigkeitArt' ,valueUpdate: 'input'"></select></td>
+                        <td> <a href="#" class="btn btn-danger" data-bind="click: $parent.removeMitarbeiter">Delete</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!--Script include VMScript.js -->
+    <script src="VMScript.js"></script>
+
+    <body>
+
+    </body>
+
+</html>
